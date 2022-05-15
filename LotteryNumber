@@ -1,0 +1,87 @@
+import java.util.Arrays;
+import java.util.Random;
+
+/**
+ *  This java program will generate 5 numbers from 1-69 and
+ *  1 number from 1-26. The program will then output the 6 number into the terminal
+ * @author Peter Xiong
+ * @version 5/14/2022
+ */
+public class LotteryNumber
+{
+	private final static int SIZE = 6;
+	
+	public static void main(String[] args)
+	{
+		Random random = new Random();
+		int[] winningNums = new int[SIZE];
+		int randomNum;
+		
+		//first ball
+		winningNums[0] = random.nextInt(69) + 1;
+
+		//The next 4 balls
+		while (winningNums[1] == 0)
+		{
+			randomNum = random.nextInt(69) + 1;
+			if (randomNum != winningNums[0])
+			{
+				winningNums[1] = randomNum;
+			}
+		}
+		while (winningNums[2] == 0)
+		{
+			randomNum = random.nextInt(69) + 1;
+			if (randomNum != winningNums[0] && randomNum != winningNums[1])
+			{
+				winningNums[2] = randomNum;
+			}
+		}
+		while (winningNums[3] == 0)
+		{
+			randomNum = random.nextInt(69) + 1;
+			if (randomNum != winningNums[0] && randomNum != winningNums[1] && randomNum != winningNums[2])
+			{
+				winningNums[3] = randomNum;
+			}
+		}
+		while (winningNums[4] == 0)
+		{
+			randomNum = random.nextInt(69) + 1;
+			if (randomNum != winningNums[0] && randomNum != winningNums[1] && randomNum != winningNums[2]
+					&& randomNum != winningNums[3])
+			{
+				winningNums[4] = randomNum;
+			}
+		}
+
+		// the last number
+		int powerball = random.nextInt(26) + 1;
+		winningNums[5] = powerball;
+
+		// --------------loop to put the first 5 ball in
+		// in ascending order------------------------------------
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = i + 1; j < 5; j++)
+			{
+				int temp = 0;
+				if (winningNums[i] > winningNums[j])
+				{
+					temp = winningNums[i];
+					winningNums[i] = winningNums[j];
+					winningNums[j] = temp;
+				}
+			}
+		}
+		 System.out.println(Arrays.toString(winningNums).replace("],",
+		 "\n").replaceAll("[\\[\\]]", " "));
+
+		
+
+	}
+	
+	
+	
+
+}
